@@ -44,7 +44,8 @@ public class ExpandableRecyclerView extends RecyclerView {
     }
 
     public static abstract class Adapter<VH extends ViewHolder> extends RecyclerView.Adapter<VH> {
-        @NonNull private final LinearLayoutManager lm;
+        @NonNull
+        private final LinearLayoutManager lm;
         private int currentPosition = -1;
 
         public Adapter(@NonNull LinearLayoutManager lm) {
@@ -68,11 +69,13 @@ public class ExpandableRecyclerView extends RecyclerView {
                             currentExpandableItem.hide();
                         }
                     }
-                    ExpandableItem expandableItem = (ExpandableItem) lm.getChildAt(currentPosition - lm.findFirstVisibleItemPosition()).findViewWithTag(ExpandableItem.TAG);
-                    if (expandableItem.isOpened()) {
-                        expandableItem.hide();
-                    } else {
-                        expandableItem.show();
+                    if (ExpandableItem != null && ExpandableItem.TAG != null) {
+                        ExpandableItem expandableItem = (ExpandableItem) lm.getChildAt(currentPosition - lm.findFirstVisibleItemPosition()).findViewWithTag(ExpandableItem.TAG);
+                        if (expandableItem.isOpened()) {
+                            expandableItem.hide();
+                        } else {
+                            expandableItem.show();
+                        }
                     }
                 }
             });
